@@ -23,6 +23,15 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+router.get('/name/:name', async (req, res) => {
+    try {
+        const student = await Student.findByName(req.params.name)
+        res.json(student)
+    } catch(err) {
+        res.status(404).json({err})
+    }
+})
+
 // Create dog route
 router.post('/', async (req, res) => {
     try {

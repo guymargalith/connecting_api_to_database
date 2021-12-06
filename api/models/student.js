@@ -33,17 +33,17 @@ class Student {
         });
     }
 
-    // static findByOwner (id) {
-    //     return new Promise (async (resolve, reject) => {
-    //         try {
-    //             let dogsData = await db.query(`SELECT * FROM dogs WHERE ownerId = $1;`, [ id ]);
-    //             const dogs = dogsData.rows.map(d => new Dog(d))
-    //             resolve (dogs);
-    //         } catch (err) {
-    //             reject('Error retrieving owner\'s dogs');
-    //         }
-    //     });
-    // }
+    static findByName (name) {
+        return new Promise (async (resolve, reject) => {
+            try {
+                let studentsData = await db.query(`SELECT * FROM students WHERE name ~* $1;`, [ name ]);
+                const students = studentsData.rows.map(d => new Student(d))
+                resolve (students);
+            } catch (err) {
+                reject('Error retrieving student with this name');
+            }
+        });
+    }
 
     static create(name, age, subject, learningDiff){
         return new Promise (async (resolve, reject) => {
